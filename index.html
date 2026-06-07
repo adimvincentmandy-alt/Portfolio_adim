@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vincent Mandy Adim | Portfolio</title>
+
+<style>
+
+:root{
+    --primary:#A5CF83;
+    --secondary:#F0E76F;
+    --accent:#ECB65F;
+    --dark-accent:#E89951;
+    --dark:#222222;
+    --light:#fffdf5;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--light);
+    color:var(--dark);
+    overflow-x: hidden;
+}
+
+/* ============================================
+   BG-PAN-TOP ANIMATION (HERO BACKGROUND)
+   ============================================ */
+.bg-pan-top {
+    background: linear-gradient(
+        180deg,
+        #1a1a2e 0%,
+        #16213e 15%,
+        #0f3460 30%,
+        #533483 50%,
+        #e94560 70%,
+        #f8b500 85%,
+        #ff6b6b 100%
+    );
+    background-size: 100% 400%;
+    animation: bgPanTop 15s ease-in-out infinite alternate;
+}
+
+@keyframes bgPanTop {
+    0% {
+        background-position: 50% 100%;
+    }
+    100% {
+        background-position: 50% 0%;
+    }
+}
+
+/* ============================================
+   PARALLAX HERO BACKGROUND
+   ============================================ */
+.parallax-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    overflow: hidden;
+}
+
+.parallax-hero::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -10%;
+    width: 120%;
+    height: 140%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(236,182,95,0.2) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(165,207,131,0.15) 0%, transparent 50%);
+    z-index: 0;
+    animation: parallaxFloat 8s ease-in-out infinite;
+}
+
+@keyframes parallaxFloat {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(-20px) translateX(10px); }
+    50% { transform: translateY(-10px) translateX(-5px); }
+    75% { transform: translateY(-30px) translateX(15px); }
+}
+
+/* ============================================
+   HORIZONTAL MARQUEE TEXT
+   ============================================ */
+.marquee-section {
+    background: var(--dark);
+    padding: 25px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.marquee-track {
+    display: flex;
+    width: fit-content;
+    animation: marqueeScroll 20s linear infinite;
+}
+
+.marquee-item {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--light);
+    white-space: nowrap;
+    padding: 0 40px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.marquee-item span {
+    color: var(--accent);
+}
+
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(80px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* ============================================
+   TEXT MASK REVEAL EFFECT
+   ============================================ */
+.text-reveal {
+    overflow: hidden;
+    position: relative;
+}
+
+.text-reveal h1 {
+    animation: textReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform: translateY(100%);
+}
+
+.text-reveal h2 {
+    animation: textReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    transform: translateY(100%);
+}
+
+.text-reveal p {
+    animation: textReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+    transform: translateY(100%);
+}
+
+@keyframes textReveal {
+    to { transform: translateY(0); }
+}
+
+/* ============================================
+   3D CARD TILT HOVER
+   ============================================ */
+.tilt-card {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.tilt-card:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(-5deg);
+    box-shadow: 
+        0 25px 50px rgba(0,0,0,0.15),
+        0 0 0 1px rgba(236,182,95,0.1);
+}
+
+/* ============================================
+   MAGNETIC BUTTON
+   ============================================ */
+.magnetic-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 35px;
+    background: var(--dark-accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.magnetic-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.magnetic-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.magnetic-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 15px 35px rgba(232, 153, 81, 0.4),
+        0 0 0 3px rgba(232, 153, 81, 0.2);
+    border-color: rgba(255,255,255,0.3);
+}
+
+.magnetic-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   GRADIENT TEXT EFFECT
+   ============================================ */
+.gradient-text {
+    background: linear-gradient(135deg, var(--dark-accent), var(--accent), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ============================================
+   EXISTING STYLES (Enhanced)
+   ============================================ */
+
+.hero{
+    display:flex;
+    align-items:center;
+    gap:70px;
+    max-width:1200px;
+    flex-wrap:wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.hero img{
+    width:340px;
+    max-width:100%;
+    border-radius: 20px;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2));
+}
+
+.hero img:hover {
+    transform: scale(1.05) rotate(2deg);
+    filter: drop-shadow(0 25px 50px rgba(0,0,0,0.3)) 
+            drop-shadow(0 0 40px rgba(236, 182, 95, 0.4))
+            drop-shadow(0 0 80px rgba(165, 207, 131, 0.2));
+}
+
+.hero-img-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-img-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: -15px;
+    bottom: -15px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0.5;
+    filter: blur(20px);
+    animation: shadowPulse 3s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.08); opacity: 0.7; }
+}
+
+.hero-content{
+    flex:1;
+}
+
+.hero-content h1{
+    font-size:3.5rem;
+    color:#fff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.hero-content h2{
+    color:#fff;
+    margin-bottom:20px;
+    font-size: 1.3rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.hero-content p{
+    font-size:1.1rem;
+    max-width:700px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+}
+
+/* SECTIONS */
+
+section{
+    padding:100px 10%;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+    font-size:2.8rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+.about{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+    font-size:1.15rem;
+    line-height: 1.8;
+}
+
+/* SKILLS */
+
+.skills{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.skill-card{
+    background:white;
+    border-left:6px solid var(--accent);
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(165, 207, 131, 0.08), rgba(236, 182, 95, 0.08));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.skill-card:hover::before {
+    opacity: 1;
+}
+
+.skill-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.skill-card h3{
+    color:var(--dark-accent);
+    margin-bottom:12px;
+    font-size: 1.3rem;
+    position: relative;
+}
+
+.skill-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* PROJECTS */
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:30px;
+}
+
+.project-card{
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    border-top:5px solid var(--primary);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(165, 207, 131, 0.12), transparent);
+    transition: top 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover::before {
+    top: 0;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) rotateX(3deg);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    border-top-color: var(--accent);
+}
+
+.project-card h3{
+    color:var(--dark-accent);
+    margin-bottom:15px;
+    font-size: 1.4rem;
+    position: relative;
+}
+
+.project-card p {
+    color: #555;
+    line-height: 1.7;
+    position: relative;
+}
+
+/* CONTACT */
+
+.contact-section {
+    background: linear-gradient(135deg, var(--dark), #333);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 50%, rgba(165,207,131,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 90% 50%, rgba(236,182,95,0.1) 0%, transparent 50%);
+}
+
+.contact-section .section-title {
+    color: white;
+}
+
+.contact-card{
+    max-width:700px;
+    margin:auto;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    padding:40px;
+    border-radius:20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.contact-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(236,182,95,0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.contact-card p{
+    margin:18px 0;
+    font-size:1.15rem;
+    color: rgba(255,255,255,0.9);
+    transition: all 0.3s ease;
+}
+
+.contact-card p:hover {
+    transform: translateX(10px);
+    color: white;
+}
+
+.contact-card a{
+    color: var(--accent);
+    text-decoration:none;
+    font-weight:bold;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.contact-card a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.contact-card a:hover::after {
+    width: 100%;
+}
+
+.contact-card a:hover {
+    color: var(--primary);
+}
+
+/* FOOTER */
+
+footer{
+    background:var(--dark);
+    color:rgba(255,255,255,0.7);
+    text-align:center;
+    padding:30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.hero{
+    text-align:center;
+    justify-content:center;
+}
+
+.hero-content h1{
+    font-size:2.5rem;
+}
+
+.hero img{
+    width:250px;
+}
+
+.marquee-item {
+    font-size: 1.2rem;
+}
+
+section {
+    padding: 60px 5%;
+}
+
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+</style>
+<base target="_blank">
+</head>
+
+<body>
+
+
+<header class="parallax-hero bg-pan-top">
+
+<div class="hero">
+
+<div class="hero-img-wrapper reveal-scale">
+<img src="Photo.png" alt="Vincent Mandy Adim">
+</div>
+
+<div class="hero-content">
+
+<div class="text-reveal">
+    <h1>Vincent Mandy Adim</h1>
+</div>
+
+<div class="text-reveal">
+    <h2 class="gradient-text">UI Developer • Frontend Developer • Backend Developer • Figma Designer</h2>
+</div>
+
+<div class="text-reveal">
+    <p>
+    This website showcases my college projects, skills, and experiences.
+    Here, I display my work, highlight my talents, and share what I've learned,
+    from website creation to coding complete systems. It serves as a reflection
+    of my abilities, dedication, and the effort I've invested throughout my
+    college journey.
+    </p>
+</div>
+
+<a href="#projects" class="magnetic-btn"><span>View My Projects →</span></a>
+
+</div>
+
+</div>
+
+</header>
+
+<div class="marquee-section">
+    <div class="marquee-track">
+        <div class="marquee-item">UI/UX Design <span>•</span> Frontend Development <span>•</span> Backend Systems <span>•</span> Figma Prototyping <span>•</span></div>
+        <div class="marquee-item">UI/UX Design <span>•</span> Frontend Development <span>•</span> Backend Systems <span>•</span> Figma Prototyping <span>•</span></div>
+        <div class="marquee-item">UI/UX Design <span>•</span> Frontend Development <span>•</span> Backend Systems <span>•</span> Figma Prototyping <span>•</span></div>
+        <div class="marquee-item">UI/UX Design <span>•</span> Frontend Development <span>•</span> Backend Systems <span>•</span> Figma Prototyping <span>•</span></div>
+    </div>
+</div>
+
+
+<section id="about">
+
+<h2 class="section-title gradient-text reveal">About Me</h2>
+
+<div class="about reveal delay-2">
+
+<p>
+I am a passionate and motivated developer who enjoys designing and building
+modern applications. My interests include UI/UX design using Figma,
+frontend development, backend development, and system creation.
+I continuously improve my skills through academic and personal projects,
+allowing me to gain experience in creating functional and user-friendly systems.
+</p>
+
+</div>
+
+</section>
+
+<section id="skills">
+
+<h2 class="section-title gradient-text reveal">Skills</h2>
+
+<div class="skills">
+
+<div class="skill-card tilt-card reveal delay-1">
+<h3>Frontend Development</h3>
+<p>HTML, CSS, JavaScript, Vue.js</p>
+</div>
+
+<div class="skill-card tilt-card reveal delay-2">
+<h3>Backend Development</h3>
+<p>PHP, MySQL, Database Management</p>
+</div>
+
+<div class="skill-card tilt-card reveal delay-3">
+<h3>UI/UX Design</h3>
+<p>Figma, Wireframes, Prototypes, User Interface Design</p>
+</div>
+
+<div class="skill-card tilt-card reveal delay-4">
+<h3>System Development</h3>
+<p>CRUD Systems, Documentation, Testing and Deployment</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="projects">
+
+<h2 class="section-title gradient-text reveal">Projects</h2>
+
+<div class="projects">
+
+<div class="project-card tilt-card reveal-left delay-1">
+
+<h3>Programming 2 Final Project</h3>
+
+<p>
+Creating our final project has been an exhilarating and rewarding experience.
+We've applied our learning to its fullest extent, developing a complete system
+that showcases our skills and knowledge. As we approach the final presentation,
+we're excited to share our hard work and dedication. This journey has not only
+been educational but also incredibly fulfilling, marking a significant milestone
+in our semester.
+</p>
+
+</div>
+
+<div class="project-card tilt-card reveal-right delay-2">
+
+<h3>UI/UX Design Projects</h3>
+
+<p>
+Created professional wireframes, mockups, and interactive prototypes using
+Figma. Focused on user experience, accessibility, and modern design trends.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="contact" class="contact-section">
+
+<h2 class="section-title reveal">Contact Information</h2>
+
+<div class="contact-card reveal-scale delay-2">
+
+<p>
+📧 <strong>Gmail:</strong>
+<a href="mailto:mandycute400@gmail.com">
+mandycute400@gmail.com
+</a>
+</p>
+
+<p>
+📱 <strong>Contact Number:</strong>
+09300674273
+</p>
+
+<p>
+🌐 <strong>Facebook:</strong>
+<a href="https://www.facebook.com/mandy.adim.2024" target="_blank">
+facebook.com/mandy.adim.2024
+</a>
+</p>
+
+<p>
+📍 Philippines
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Vincent Mandy Adim | Portfolio Website
+</p>
+
+</footer>
+
+<script>
+
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+    observer.observe(el);
+});
+</script>
+
+</body>
+</html>
